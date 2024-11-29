@@ -15,17 +15,25 @@ Pilha pilha(int max)
 {
     Pilha p = (Pilha)malloc(sizeof(struct pilha));
     p->item = (char *)malloc(max * sizeof(char));
-    p->topo = 0;
+    p->topo = -1;
     p->max = max;
     return p;
+}
+
+// função para verificar se a pilha está vazia
+int vaziap(Pilha p)
+{
+    return p->topo == -1;
 }
 
 // função para desempilhar um caractere da pilha
 char desempilha(Pilha p)
 {
-    if (p->topo > 0)
+    if (!vaziap(p))
     {
-        return p->item[--p->topo];
+        char x = p->item[p->topo];
+        p->topo--;
+        return x;
     }
     return '\0'; // retorne o caractere nulo se a pilha estiver vazia
 }
@@ -35,14 +43,9 @@ void empilha(char c, Pilha p)
 {
     if (p->topo < p->max)
     {
-        p->item[p->topo++] = c;
+        p->topo++;
+        p->item[p->topo] = c;
     }
-}
-
-// função para verificar se a pilha está vazia
-int vaziap(Pilha p)
-{
-    return p->topo == 0;
 }
 
 // função para retornar o caractere no topo da pilha
@@ -50,7 +53,7 @@ char topo(Pilha p)
 {
     if (!vaziap(p))
     {
-        return p->item[p->topo - 1];
+        return p->item[p->topo];
     }
     return '\0'; // Retorna o caractere nulo se a pilha estiver vazia
 }
@@ -59,7 +62,7 @@ char topo(Pilha p)
 void destroip(Pilha p)
 {
     free(p->item);
-    p->topo = 0;
+    p->topo = -1;
     p->max = 0;
 }
 
