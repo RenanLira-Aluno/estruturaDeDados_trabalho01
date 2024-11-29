@@ -6,7 +6,7 @@
 
 typedef struct pilha
 {
-    char *v;
+    char *item;
     int topo, max;
 } *Pilha;
 
@@ -14,7 +14,7 @@ typedef struct pilha
 Pilha pilha(int max)
 {
     Pilha p = (Pilha)malloc(sizeof(struct pilha));
-    p->v = (char *)malloc(max * sizeof(char));
+    p->item = (char *)malloc(max * sizeof(char));
     p->topo = 0;
     p->max = max;
     return p;
@@ -25,7 +25,7 @@ char desempilha(Pilha p)
 {
     if (p->topo > 0)
     {
-        return p->v[--p->topo];
+        return p->item[--p->topo];
     }
     return '\0'; // retorne o caractere nulo se a pilha estiver vazia
 }
@@ -35,7 +35,7 @@ void empilha(char c, Pilha p)
 {
     if (p->topo < p->max)
     {
-        p->v[p->topo++] = c;
+        p->item[p->topo++] = c;
     }
 }
 
@@ -50,7 +50,7 @@ char topo(Pilha p)
 {
     if (!vaziap(p))
     {
-        return p->v[p->topo - 1];
+        return p->item[p->topo - 1];
     }
     return '\0'; // Retorna o caractere nulo se a pilha estiver vazia
 }
@@ -58,7 +58,7 @@ char topo(Pilha p)
 // função para destruir a pilha
 void destroip(Pilha p)
 {
-    free(p->v);
+    free(p->item);
     p->topo = 0;
     p->max = 0;
 }
