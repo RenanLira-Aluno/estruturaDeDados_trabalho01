@@ -4,45 +4,45 @@
 #include <cctype>
 #include <stdio.h>
 
-typedef struct
+typedef struct pilha
 {
     char *v;
     int topo, max;
-} Pilha;
+} *Pilha;
 
 // função para criar uma pilha
 Pilha pilha(int max)
 {
-    Pilha p;
-    p.v = (char *)malloc(max * sizeof(char));
-    p.topo = 0;
-    p.max = max;
+    Pilha p = (Pilha)malloc(sizeof(struct pilha));
+    p->v = (char *)malloc(max * sizeof(char));
+    p->topo = 0;
+    p->max = max;
     return p;
 }
 
 // função para desempilhar um caractere da pilha
-char desempilha(Pilha &p)
+char desempilha(Pilha p)
 {
-    if (p.topo > 0)
+    if (p->topo > 0)
     {
-        return p.v[--p.topo];
+        return p->v[--p->topo];
     }
     return '\0'; // retorne o caractere nulo se a pilha estiver vazia
 }
 
 // função para empilhar um caractere na pilha
-void empilha(char c, Pilha &p)
+void empilha(char c, Pilha p)
 {
-    if (p.topo < p.max)
+    if (p->topo < p->max)
     {
-        p.v[p.topo++] = c;
+        p->v[p->topo++] = c;
     }
 }
 
 // função para verificar se a pilha está vazia
 int vaziap(Pilha p)
 {
-    return p.topo == 0;
+    return p->topo == 0;
 }
 
 // função para retornar o caractere no topo da pilha
@@ -50,13 +50,13 @@ char topo(Pilha p)
 {
     if (!vaziap(p))
     {
-        return p.v[p.topo - 1];
+        return p->v[p->topo - 1];
     }
     return '\0'; // Retorna o caractere nulo se a pilha estiver vazia
 }
 
 // função para destruir a pilha
-void destroip(Pilha *p)
+void destroip(Pilha p)
 {
     free(p->v);
     p->topo = 0;
@@ -110,7 +110,7 @@ char *posfixa(char *e)
     while (!vaziap(P))
         s[j++] = desempilha(P);
     s[j] = '\0';
-    destroip(&P);
+    destroip(P);
 
     return s;
 }
@@ -145,7 +145,7 @@ int valor(char *e)
         }
     }
     int z = desempilha(P);
-    destroip(&P);
+    destroip(P);
     return z;
 }
 
