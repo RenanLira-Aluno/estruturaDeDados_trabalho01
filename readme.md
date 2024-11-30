@@ -15,3 +15,7 @@
 
 - Windows
 ```./q301.exe```
+
+## Video De explicação da Questão
+
+![](/video/explicacao.mp4)
