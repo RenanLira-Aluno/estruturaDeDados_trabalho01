@@ -18,4 +18,4 @@
 
 ## Video De explicação da Questão
 
-[Video](/video/explicacao.mp4)
+[Video](video/explicacao.mp4)
