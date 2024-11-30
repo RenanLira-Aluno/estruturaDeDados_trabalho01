@@ -154,8 +154,9 @@ int valor(char *e)
 
 int main()
 {
-
-    char *e = "(2+3)*4";
+    char e[256];
+    printf("Digite a expressão: ");
+    scanf("%255s", e);
     char *p = posfixa(e);
     printf("%s = %d\n", p, valor(p));
     return 0;
