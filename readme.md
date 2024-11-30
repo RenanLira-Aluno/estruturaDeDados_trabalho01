@@ -18,4 +18,4 @@
 
 ## Video De explicação da Questão
 
-[Video](video/explicacao.mp4)
+[youtube](https://youtu.be/0elOrIiCSt4)
